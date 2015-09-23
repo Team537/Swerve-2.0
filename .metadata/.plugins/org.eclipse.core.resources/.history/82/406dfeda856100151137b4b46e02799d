@@ -84,15 +84,15 @@ public class SwerveDrive extends IComponent {
 		dashboardTimer.start();
 
 		if (dashboardTimer.get() > 0.20) {
-			SmartDashboard.putNumber("FWD", FWD);
-			SmartDashboard.putNumber("STR", STR);
-			SmartDashboard.putNumber("RCW", RCW);
-			SmartDashboard.putNumber("GRO", GRO);
-
 			FRModule.DashboardPrint();
 			FLModule.DashboardPrint();
 			BRModule.DashboardPrint();
 			BLModule.DashboardPrint();
+
+			SmartDashboard.putNumber("FWD", FWD);
+			SmartDashboard.putNumber("STR", STR);
+			SmartDashboard.putNumber("RCW", RCW);
+			SmartDashboard.putNumber("GRO", GRO);
 
 			dashboardTimer.stop();
 			dashboardTimer.reset();

@@ -15,10 +15,14 @@ public class SwerveDrive extends IComponent {
 	private float tuningSetpoint, tuningP, tuningI, tuningD;
 
 	public SwerveDrive(Gyro gyro) {
-		this.FLModule = new SwerveModule(11, 15, 16, 17, 5, Schematic.PID_FRONT_LEFT_ANGLE, Schematic.PID_FRONT_LEFT_DRIVE, Schematic.PID_FRONT_LEFT_DISTANCE, 0, "Front Left");
-		this.FRModule = new SwerveModule(12, 16, 23, 22, 6, Schematic.PID_FRONT_RIGHT_ANGLE, Schematic.PID_FRONT_RIGHT_DRIVE, Schematic.PID_FRONT_RIGHT_DISTANCE, 0, "Front Right");
-		this.BLModule = new SwerveModule(10, 14, 14, 15, 4, Schematic.PID_BACK_LEFT_ANGLE, Schematic.PID_BACK_LEFT_DRIVE, Schematic.PID_BACK_LEFT_DISTANCE, 0, "Back Left");
-		this.BRModule = new SwerveModule(13, 17, 24, 25, 7, Schematic.PID_BACK_RIGHT_ANGLE, Schematic.PID_BACK_RIGHT_DRIVE, Schematic.PID_BACK_RIGHT_DISTANCE, 0, "Back Right");
+		this.FLModule = new SwerveModule(11, 15, 16, 17, 5, Schematic.PID_FRONT_LEFT_ANGLE,
+				Schematic.PID_FRONT_LEFT_DRIVE, Schematic.PID_FRONT_LEFT_DISTANCE, 0, "Front Left");
+		this.FRModule = new SwerveModule(12, 16, 23, 22, 6, Schematic.PID_FRONT_RIGHT_ANGLE,
+				Schematic.PID_FRONT_RIGHT_DRIVE, Schematic.PID_FRONT_RIGHT_DISTANCE, 0, "Front Right");
+		this.BLModule = new SwerveModule(10, 14, 14, 15, 4, Schematic.PID_BACK_LEFT_ANGLE,
+				Schematic.PID_BACK_LEFT_DRIVE, Schematic.PID_BACK_LEFT_DISTANCE, 0, "Back Left");
+		this.BRModule = new SwerveModule(13, 17, 24, 25, 7, Schematic.PID_BACK_RIGHT_ANGLE,
+				Schematic.PID_BACK_RIGHT_DRIVE, Schematic.PID_BACK_RIGHT_DISTANCE, 0, "Back Right");
 
 		this.gyro = gyro;
 		this.dashboardTimer = new Timer();
@@ -43,7 +47,8 @@ public class SwerveDrive extends IComponent {
 		double FWD2 = (FWD * Math.cos(GRO)) + STR * Math.sin(GRO);
 		double STR2 = (-FWD * Math.sin(GRO)) + STR * Math.cos(GRO);
 
-		double r = Math.sqrt((Schematic.ROBOT_WIDTH * Schematic.ROBOT_WIDTH) + (Schematic.ROBOT_LENGTH * Schematic.ROBOT_LENGTH));
+		double r = Math.sqrt(
+				(Schematic.ROBOT_WIDTH * Schematic.ROBOT_WIDTH) + (Schematic.ROBOT_LENGTH * Schematic.ROBOT_LENGTH));
 		double a = (STR2 - RCW) * (Schematic.ROBOT_WIDTH / r);
 		double b = (STR2 + RCW) * (Schematic.ROBOT_WIDTH / r);
 		double c = (FWD2 - RCW) * (Schematic.ROBOT_LENGTH / r);
@@ -141,21 +146,24 @@ public class SwerveDrive extends IComponent {
 		}
 	}
 
-	public void autonomousDrive(float frontLeftSpeed, float frontRightSpeed, float backLeftSpeed, float backRightSpeed) {
+	public void autonomousDrive(float frontLeftSpeed, float frontRightSpeed, float backLeftSpeed,
+			float backRightSpeed) {
 		FLModule.drive(frontLeftSpeed);
 		FRModule.drive(frontRightSpeed);
 		BLModule.drive(backRightSpeed);
 		BRModule.drive(backLeftSpeed);
 	}
 
-	public void autonomousSteer(float frontLeftAngle, float frontRightAngle, float backLeftAngle, float backRightAngle) {
+	public void autonomousSteer(float frontLeftAngle, float frontRightAngle, float backLeftAngle,
+			float backRightAngle) {
 		FLModule.steer(frontLeftAngle);
 		FRModule.steer(frontRightAngle);
 		BLModule.steer(backRightAngle);
 		BRModule.steer(backLeftAngle);
 	}
 
-	public void autonomousDistance(float frontLeftDistance, float frontRightDistance, float backLeftDistance, float backRightDistance) {
+	public void autonomousDistance(float frontLeftDistance, float frontRightDistance, float backLeftDistance,
+			float backRightDistance) {
 		FLModule.distance(frontLeftDistance);
 		FRModule.distance(frontRightDistance);
 		BLModule.distance(backLeftDistance);
@@ -163,10 +171,12 @@ public class SwerveDrive extends IComponent {
 	}
 
 	public boolean onTargetAngle() {
-		return (FLModule.PIDAtTargetAngle() && FRModule.PIDAtTargetAngle() && BLModule.PIDAtTargetAngle() && BRModule.PIDAtTargetAngle()) ? true : false;
+		return (FLModule.PIDAtTargetAngle() && FRModule.PIDAtTargetAngle() && BLModule.PIDAtTargetAngle()
+				&& BRModule.PIDAtTargetAngle()) ? true : false;
 	}
 
 	public boolean onTargetDistance() {
-		return (FLModule.PIDAtTargetDistance() && FRModule.PIDAtTargetDistance() && BLModule.PIDAtTargetDistance() && BRModule.PIDAtTargetDistance()) ? true : false;
+		return (FLModule.PIDAtTargetDistance() && FRModule.PIDAtTargetDistance() && BLModule.PIDAtTargetDistance()
+				&& BRModule.PIDAtTargetDistance()) ? true : false;
 	}
 }

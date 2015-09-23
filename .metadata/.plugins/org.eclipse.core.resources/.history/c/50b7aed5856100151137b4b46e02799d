@@ -84,15 +84,24 @@ public class SwerveDrive extends IComponent {
 		dashboardTimer.start();
 
 		if (dashboardTimer.get() > 0.20) {
+			FRModule.DashboardPrint();
+			FLModule.DashboardPrint();
+			BRModule.DashboardPrint();
+			BLModule.DashboardPrint();
+
 			SmartDashboard.putNumber("FWD", FWD);
 			SmartDashboard.putNumber("STR", STR);
 			SmartDashboard.putNumber("RCW", RCW);
 			SmartDashboard.putNumber("GRO", GRO);
 
-			FRModule.DashboardPrint();
-			FLModule.DashboardPrint();
-			BRModule.DashboardPrint();
-			BLModule.DashboardPrint();
+			SmartDashboard.putNumber("Front Right Angle", fra);
+			SmartDashboard.putNumber("Front Right Steer", frs);
+			SmartDashboard.putNumber("Front Left Angle", fla);
+			SmartDashboard.putNumber("Front Left Steer", fls);
+			SmartDashboard.putNumber("Back Right Angle", bra);
+			SmartDashboard.putNumber("Back Right Steer", brs);
+			SmartDashboard.putNumber("Back Left Angle", bla);
+			SmartDashboard.putNumber("Back Left Steer", bls);
 
 			dashboardTimer.stop();
 			dashboardTimer.reset();
