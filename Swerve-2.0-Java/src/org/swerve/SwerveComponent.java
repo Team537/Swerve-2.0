@@ -1,5 +1,6 @@
 package org.swerve;
 
+import org.Schematic;
 import org.components.IComponent;
 
 import edu.wpi.first.wpilibj.Gyro;
@@ -11,10 +12,6 @@ public class SwerveComponent extends IComponent {
 	private TalonManager FLSteer, FRSteer, BLSteer, BRSteer;
 	private Gyro gyro;
 
-	private boolean fieldOriented;
-	private int robotLength;
-	private int robotWidth;
-
 	/**
 	 * Creates a new Swerve Drive (implements {@link org.components.IComponent}).
 	 * 
@@ -23,11 +20,8 @@ public class SwerveComponent extends IComponent {
 	 * @param robotWidth The width of the robot (use same unit of measurement as the length).
 	 * @param gyro The gyroscope to be used when orienting the robot.
 	 */
-	public SwerveComponent(boolean fieldOrientated, int robotLength, int robotWidth, Gyro gyro) {
+	public SwerveComponent(Gyro gyro) {
 		this.gyro = gyro;
-		this.fieldOriented = fieldOrientated;
-		this.robotLength = robotLength;
-		this.robotWidth = robotWidth;
 
 		this.FLDrive = new TalonManager(0, TypeTalon.SPEED, TypeReadings.ANALOG_ENCODER);
 		this.FRDrive = new TalonManager(4, TypeTalon.SPEED, TypeReadings.ANALOG_ENCODER);
@@ -41,28 +35,20 @@ public class SwerveComponent extends IComponent {
 	}
 
 	@Override
-	public void autonomousUpdate() {
-	}
-
-	@Override
-	public void testUpdate() {
-	}
-
-	@Override
-	public void operatorUpdate(Joystick joystick) {
-		double FWD = joystick.getY();
-		double STR = joystick.getX();
-		double RCW = joystick.getZ();
-		double GRO = fieldOriented ? gyro.getAngle() : 0;
+	public void update(Joystick joystick1, Joystick joystick2) {
+		double FWD = joystick1.getY();
+		double STR = joystick1.getX();
+		double RCW = joystick1.getZ();
+		double GRO = Schematic.FIELD_ORIENTATED ? gyro.getAngle() : 0;
 
 		double FWD2 = (FWD * Math.cos(GRO)) + STR * Math.sin(GRO);
 		double STR2 = (-FWD * Math.sin(GRO)) + STR * Math.cos(GRO);
 
-		double r = Math.sqrt((robotLength * robotLength) + (robotWidth * robotWidth));
-		double a = STR2 - RCW * (robotLength / r);
-		double b = STR2 + RCW * (robotLength / r);
-		double c = FWD2 - RCW * (robotWidth / r);
-		double d = FWD2 + RCW * (robotWidth / r);
+		double r = Math.sqrt((Schematic.ROBOT_LENGTH * Schematic.ROBOT_LENGTH) + (Schematic.ROBOT_WIDTH * Schematic.ROBOT_WIDTH));
+		double a = STR2 - RCW * (Schematic.ROBOT_LENGTH / r);
+		double b = STR2 + RCW * (Schematic.ROBOT_LENGTH / r);
+		double c = FWD2 - RCW * (Schematic.ROBOT_WIDTH / r);
+		double d = FWD2 + RCW * (Schematic.ROBOT_WIDTH / r);
 
 		double frs = Math.sqrt(b * b + c * c);
 		double fls = Math.sqrt(b * b + d * d);
@@ -122,9 +108,5 @@ public class SwerveComponent extends IComponent {
 		SmartDashboard.putNumber("Back Right Steer: ", brs);
 		SmartDashboard.putNumber("Back Left Angle: ", bla);
 		SmartDashboard.putNumber("Back Left Steer: ", bls);
-	}
-
-	@Override
-	public void dispose() {
 	}
 }

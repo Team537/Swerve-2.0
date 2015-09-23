@@ -33,7 +33,7 @@ public class DoublePotentiometer extends AnalogPotentiometer {
 		double delta = currentReading - lastReading;
 		double sum = 0;
 
-		if (delta > 300) { 
+		if (delta > 300) {
 			// Make sure that when looping past reset point it doesn't go backwards.
 			// return lastval;
 			currentReading = lastReading;

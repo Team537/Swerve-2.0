@@ -1,0 +1,12 @@
+package org.components;
+
+import edu.wpi.first.wpilibj.Joystick;
+
+public abstract class IComponent {
+	/**
+	 * This is run during Operator Control Mode and is used for running updates the component.
+	 * 
+	 * @param joystick The joysticks that can be used to move the robot.
+	 */
+	public abstract void update(Joystick joystick);
+}
