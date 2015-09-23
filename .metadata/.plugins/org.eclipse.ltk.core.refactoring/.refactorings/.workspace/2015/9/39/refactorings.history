@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Delete resource &apos;Swerve-2.0&apos;" deleteContents="true" description="Delete resource &apos;Swerve-2.0&apos;" element1="/Swerve-2.0" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1442965416265"/>&#x0A;<refactoring comment="Delete resource &apos;Swerve-1.5&apos;" deleteContents="true" description="Delete resource &apos;Swerve-1.5&apos;" element1="/Swerve-1.5" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1442965437585"/>
-</session>
